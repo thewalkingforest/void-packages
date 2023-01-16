@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Obsidian
+StartupWMClass=obsidian
+Comment=A powerful and extensible knowledge base
+Exec=/usr/lib/obsidian/obsidian
+Icon=text-x-generic
+Type=Application
+Categories=Utility;TextEditor
+Path=/usr/bin

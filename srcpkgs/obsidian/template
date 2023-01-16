@@ -1,0 +1,39 @@
+# Template file for 'obsidian'
+pkgname=obsidian
+version=1.1.9
+revision=1
+archs="x86_64"
+depends="ffmpeg"
+short_desc="Powerful and extensible knowledge base"
+maintainer="Forest Walker <fwalker@tutamail.com>"
+license="custom:Proprietary"
+homepage="https://obsidian.md"
+distfiles="https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/obsidian-${version}.tar.gz"
+checksum=74547b2da0d1270a71acdc8f36c7868baea02001ce29fe40bb655797b4811921
+repository=nonfree
+restricted=yes
+
+do_install() {
+	local package_location="usr/lib/$pkgname" item
+	vmkdir usr/share/pixmaps
+	vmkdir usr/share/applications
+	vcopy ${FILESDIR}/obsidian.desktop /usr/share/applications/
+	vmkdir ${package_location}
+	chmod +x obsidian
+	for item in locales libEGL.so obsidian resources libffmpeg.so resources.pak \
+	chrome-sandbox libGLESv2.so snapshot_blob.bin chrome_100_percent.pak \
+	libvk_swiftshader.so v8_context_snapshot.bin chrome_200_percent.pak libvulkan.so.1 \
+	vk_swiftshader_icd.json chrome_crashpad_handler LICENSE.electron.txt icudtl.dat \
+	LICENSES.chromium.html;do
+		vcopy "${item}" "${package_location}"
+	done
+	vmkdir usr/bin
+	ln -sfr $DESTDIR/${package_location}/obsidian $DESTDIR/usr/bin/obsidian
+}
+
+post_install() {
+#	vlicense $FILESDIR/LICENSE.electron.txt
+#	vlicense $FILESDIR/LICENSES.chromium.html
+	vlicense LICENSE.electron.txt
+	vlicense LICENSES.chromium.html
+}
