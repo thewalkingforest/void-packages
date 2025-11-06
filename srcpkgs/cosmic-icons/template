@@ -1,0 +1,16 @@
+# Template file for 'cosmic-icons'
+pkgname=cosmic-icons
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just"
+short_desc="Cosmic icon theme"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="CC-BY-SA-4.0"
+homepage="https://github.com/pop-os/cosmic-icons"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=49b5750b7b9798a93b8a68f2065c1664fe9f7955cb335d23aa1b37e54c184f4a
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

@@ -1,0 +1,35 @@
+# Template file for 'cosmic'
+pkgname=cosmic
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+metapackage=yes
+short_desc="COSMIC meta-package for Void Linux"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="Public Domain"
+homepage="https://github.com/pop-os/cosmic-epoch"
+
+depends="
+ cosmic-applets>=${version}
+ cosmic-applibrary>=${version}
+ cosmic-bg>=${version}
+ cosmic-comp>=${version}
+ cosmic-edit>=${version}
+ cosmic-files>=${version}
+ cosmic-greeter>=${version}
+ cosmic-icons>=${version}
+ cosmic-idle>=${version}
+ cosmic-launcher>=${version}
+ cosmic-notifications>=${version}
+ cosmic-osd>=${version}
+ cosmic-panel>=${version}
+ cosmic-player>=${version}
+ cosmic-randr>=${version}
+ cosmic-screenshot>=${version}
+ cosmic-session>=${version}
+ cosmic-settings>=${version}
+ cosmic-settings-daemon>=${version}
+ cosmic-term>=${version}
+ cosmic-wallpapers>=${version}
+ cosmic-workspaces-epoch>=${version}
+ xdg-desktop-portal-cosmic>=${version}"

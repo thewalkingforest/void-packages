@@ -1,0 +1,21 @@
+# Template file for 'cosmic-settings-daemon'
+pkgname=cosmic-settings-daemon
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+build_style=gnu-makefile
+make_build_args="-e VENDOR=1"
+make_install_args="-e prefix=${DESTDIR}/usr"
+hostmakedepends="cargo pkg-config tar"
+makedepends="eudev-libudev-devel libinput-devel pulseaudio-devel openssl-devel"
+depends="eudev-libudev libinput pulseaudio openssl"
+short_desc="COSMIC settings daemon"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-settings-daemon"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=5282a93f01b6c80da5c892b5378d4c855d49c8345ca53ad4a757803e1e7014c1
+
+pre_build() {
+	make vendor
+}

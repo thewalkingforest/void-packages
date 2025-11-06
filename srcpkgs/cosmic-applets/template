@@ -1,0 +1,26 @@
+# Template file for 'cosmic-applets'
+pkgname=cosmic-applets
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel eudev-libudev-devel dbus-devel libinput-devel libpulseaudio pipewire-devel clang17-devel"
+depends="libxkbcommon eudev-libudev dbus libinput libpulseaudio pipewire clang17"
+short_desc="COSMIC applets for cosmic panel"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-applets"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=38a56594661d45f92e86108cd269f1362572f971f4834b89849e1b27ca8544c6
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

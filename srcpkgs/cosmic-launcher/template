@@ -1,0 +1,26 @@
+# Template file for 'cosmic-launcher'
+pkgname=cosmic-launcher
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel libzstd-devel AppStream-devel"
+depends="intltool AppStream desktop-file-utils pop-launcher"
+short_desc="COSMIC app launcher"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-launcher"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=cdd3c47eb2f16d05915689216bbf7a3bcbd540cb3b4cdfa80d21b8aec0bb8459
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

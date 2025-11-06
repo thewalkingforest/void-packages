@@ -1,0 +1,21 @@
+# Template file for 'cosmic-osd'
+pkgname=cosmic-osd
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+build_style=gnu-makefile
+make_build_args="-e VENDOR=1"
+make_install_args="-e prefix=${DESTDIR}/usr"
+hostmakedepends="cargo pkg-config tar"
+makedepends="libxkbcommon-devel pulseaudio-devel pipewire-devel clang17-devel eudev-libudev-devel libinput-devel"
+depends="libxkbcommon pulseaudio pipewire clang17 eudev-libudev libinput"
+short_desc="COSMIC osd"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-osd"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=344ace1aafb922ef041b898cc83a40fa140890b21456ac1b17af32028a18cfcd
+
+pre_build() {
+	make vendor
+}

@@ -1,0 +1,26 @@
+# Template file for 'cosmic-panel'
+pkgname=cosmic-panel
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel"
+depends="libxkbcommon"
+short_desc="COSMIC panel"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-panel"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=b77cc2706b7bdbf8e6485f98300db85a3b72326fd9d731d8485ec51218a28266
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

@@ -1,0 +1,26 @@
+# Template file for 'cosmic-bg'
+pkgname=cosmic-bg
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel"
+depends="libxkbcommon"
+short_desc="COSMIC background tool"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-bg"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=84b4aa25f9bd8017da6b63eb6c985affda46ca6e39bb2d4df69ffd82e92cb236
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

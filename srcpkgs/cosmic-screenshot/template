@@ -1,0 +1,24 @@
+# Template file for 'cosmic-screenshot'
+pkgname=cosmic-screenshot
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="cargo pkg-config just tar"
+short_desc="COSMIC screenshot utility"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-screenshot"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=ec4f10568c136a9079664f47bf39b49ef61664e275dd4bbd516c18553ce98afa
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

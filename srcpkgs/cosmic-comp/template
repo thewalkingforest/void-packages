@@ -1,0 +1,21 @@
+# Template file for 'cosmic-comp'
+pkgname=cosmic-comp
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+build_style=gnu-makefile
+make_build_args="-e VENDOR=1"
+make_install_args="-e prefix=${DESTDIR}/usr"
+hostmakedepends="cargo pkg-config tar"
+makedepends="eudev-libudev-devel libseat-devel libxkbcommon-devel libinput-devel pixman-devel libgbm-devel libdisplay-info-devel"
+depends="xdg-desktop-portal-cosmic eudev-libudev libseat libxkbcommon libinput pixman libgbm libdisplay-info"
+short_desc="Compositor for COSMIC desktop environment"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-comp"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=c9d0ee53f261ced7f6379139bae026b70bf04898f65fe6e0214423b7f0ac1755
+
+pre_build() {
+	make vendor
+}

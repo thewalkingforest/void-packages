@@ -1,0 +1,22 @@
+# Template file for 'cosmic-session'
+pkgname=cosmic-session
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="cargo just"
+makedepends="xdg-desktop-portal-cosmic"
+depends="xdg-desktop-portal-cosmic"
+short_desc="COSMIC session manager"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-session"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=94ffb2ef1ff6220894db036d655fa240c65478e41a8b7ededa7b251af662c9df
+
+do_build() {
+	just
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

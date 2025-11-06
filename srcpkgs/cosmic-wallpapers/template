@@ -1,0 +1,13 @@
+# Template file for 'cosmic-wallpapers'
+pkgname=cosmic-wallpapers
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+build_style=gnu-makefile
+make_install_args="-e prefix=${DESTDIR}/usr"
+short_desc="COSMIC wallpapers"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="CC-BY-SA-4.0"
+homepage="https://github.com/pop-os/cosmic-wallpapers"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=330d280eea087143a7cb45b37513e2ce9d0e09a9515e2a780ae9ada91fac80ce

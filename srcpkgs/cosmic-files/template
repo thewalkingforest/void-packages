@@ -1,0 +1,28 @@
+# Template file for 'cosmic-files'
+pkgname=cosmic-files
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel libzstd-devel glib-devel "
+depends="libxkbcommon libzstd glib cosmic-icons"
+short_desc="COSMIC file manager"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-files"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=c7cd1c84d040ca464f3679816f622a70505ca350fa2e46f0a69c58fbd741caba
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	export VERGEN_GIT_COMMIT_DATE=${version}
+	export VERGEN_GIT_SHA=${_commit}
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

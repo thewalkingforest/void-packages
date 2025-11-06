@@ -1,0 +1,21 @@
+# Template file for 'cosmic-workspaces-epoch'
+pkgname=cosmic-workspaces-epoch
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+build_style=gnu-makefile
+make_build_args="-e VENDOR=1"
+make_install_args="-e prefix=${DESTDIR}/usr"
+hostmakedepends="cargo pkg-config tar"
+makedepends="libxkbcommon-devel eudev-libudev-devel libgbm-devel libinput-devel"
+depends="libxkbcommon eudev-libudev libgbm libinput"
+short_desc="COSMIC workspaces"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-workspaces-epoch"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=678b4c78b3fd5199986fb41ca5ab901e181aaa6e46461a063abde35696e7195b
+
+pre_build() {
+	make vendor
+}

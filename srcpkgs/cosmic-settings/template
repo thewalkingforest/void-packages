@@ -1,0 +1,26 @@
+# Template file for 'cosmic-settings'
+pkgname=cosmic-settings
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel pipewire-devel clang17-devel eudev-libudev-devel libinput-devel"
+depends="libxkbcommon pipewire clang17 eudev-libudev libinput"
+short_desc="COSMISC settings"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-settings"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=5f7ee7c9c9332f9a1d4ec0cd53d52d47d5edea2502c103bd46c7dc31e1bd060b
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

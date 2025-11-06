@@ -1,0 +1,28 @@
+# Template file for 'cosmic-greeter'
+pkgname=cosmic-greeter
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel clang17-devel eudev-libudev-devel pam-devel libinput-devel"
+depends="libxkbcommon clang17 eudev-libudev pam libinput"
+short_desc="COSMIC greeter"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-greeter"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=7b3cb68fb69024cb1ca130b81f65fc1220c36ccb6de21695fe0948afad7c87e5
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	export VERGEN_GIT_COMMIT_DATE=${version}
+	export VERGEN_GIT_SHA=${_commit}
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

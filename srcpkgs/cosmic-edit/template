@@ -1,0 +1,28 @@
+# Template file for 'cosmic-edit'
+pkgname=cosmic-edit
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel glib-devel"
+depends="libxkbcommon glib"
+short_desc="COSMIC text editor"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-edit"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=4a2b810c4e4a46820e6e4658ee7ef045271d294ae060f4e9d1b5497c32b751ed
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	export VERGEN_GIT_COMMIT_DATE=${version}
+	export VERGEN_GIT_SHA=${_commit}
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

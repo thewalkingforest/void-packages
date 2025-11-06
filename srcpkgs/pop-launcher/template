@@ -1,0 +1,29 @@
+# Template file for 'pop-launcher'
+pkgname=pop-launcher
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel"
+depends="libxkbcommon"
+short_desc="IPC-based desktop launcher"
+maintainer="TheWalkingForest <fwalker@tutamail.com>"
+license="MPL-2.0"
+homepage="https://github.com/pop-os/launcher"
+#changelog=""
+distfiles="https://github.com/pop-os/launcher/archive/refs/tags/${_tag}.tar.gz"
+checksum=08261c413079db1a49226aa8155460db6f8914272fb1f744edc1d00f59c64cfa
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	export VERGEN_GIT_COMMIT_DATE=${version}
+	export VERGEN_GIT_SHA=${_commit}
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

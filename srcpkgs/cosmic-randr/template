@@ -1,0 +1,24 @@
+# Template file for 'cosmic-randr'
+pkgname=cosmic-randr
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="cargo just tar"
+short_desc="COSMIC randr"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-randr"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=7fc72d0cc000bef1704bc697c0afa8d402aa5e76dbdd87f1272c88d31ab21e98
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}

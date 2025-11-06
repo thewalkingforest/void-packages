@@ -1,0 +1,34 @@
+# Template file for 'cosmic-term'
+pkgname=cosmic-term
+version=1.0.0.beta.5
+revision=1
+_tag=epoch-${version/.beta/-beta}
+hostmakedepends="just cargo pkg-config tar"
+makedepends="libxkbcommon-devel libzstd-devel"
+depends="libxkbcommon libzstd"
+short_desc="COSMIC terminal emulator"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/pop-os/cosmic-term"
+distfiles="https://github.com/pop-os/${pkgname}/archive/refs/tags/${_tag}.tar.gz"
+checksum=d0017b65ba4094bfbecfa1900bb94efccc8b87149f853e9bc81e5892aac5d40e
+
+pre_build() {
+	just vendor
+}
+
+do_build() {
+	export VERGEN_GIT_COMMIT_DATE=${version}
+	export VERGEN_GIT_SHA=${_commit}
+	just build-vendored
+}
+
+do_install() {
+	just rootdir=${DESTDIR} install
+}
+
+post_install() {
+	for t in color-schemes/*.ron; do
+		vsconf "$t"
+	done
+}
