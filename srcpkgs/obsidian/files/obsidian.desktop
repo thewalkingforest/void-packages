@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Obsidian
+StartupWMClass=obsidian
+Comment=A powerful and extensible knowledge base
+GenericName=Internet Messenger
+Exec=/usr/lib/obsidian/obsidian
+Icon=text-x-generic
+Type=Application
+Categories=Network;InstantMessaging;
+Path=/usr/bin
