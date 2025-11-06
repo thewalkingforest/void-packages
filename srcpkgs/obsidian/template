@@ -1,0 +1,33 @@
+# Template file for 'obsidian'
+pkgname=obsidian
+version=1.9.14
+revision=1
+archs="x86_64"
+depends="ffmpeg"
+short_desc="Powerful and extensible knowledge base"
+maintainer="TheWalkingForest <4783673-TheWalkingForest@users.noreply.gitlab.com>"
+license="custom:Proprietary"
+homepage="https://obsidian.md"
+distfiles="https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/obsidian-${version}.tar.gz"
+checksum=bd2f0f0b3f1da4c16f2421751debb69be423f61976666c4d33403007a09b53cf
+repository=nonfree
+restricted=yes
+nostrip=yes
+
+do_install() {
+	vmkdir usr/share/pixmaps
+	vmkdir usr/share/applications
+	vcopy ${FILESDIR}/obsidian.desktop usr/share/applications/
+	chmod +x obsidian
+
+	vmkdir usr/lib/${pkgname}
+	vcopy * usr/lib/${pkgname}
+
+	vmkdir usr/bin
+	ln -sfr $DESTDIR/usr/lib/${pkgname}/obsidian $DESTDIR/usr/bin/obsidian
+}
+
+post_install() {
+	vlicense LICENSE.electron.txt
+	vlicense LICENSES.chromium.html
+}
