@@ -33,6 +33,7 @@ depends="
  tree-sitter-qmljs
  tree-sitter-query
  tree-sitter-rust
+ tree-sitter-scheme
  tree-sitter-toml
  tree-sitter-typescript
  tree-sitter-vim

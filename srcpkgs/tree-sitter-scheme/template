@@ -1,0 +1,15 @@
+# Template file for 'tree-sitter-scheme'
+pkgname=tree-sitter-scheme
+version=0.24.7
+revision=1
+build_style=tree-sitter
+short_desc="Scheme grammar for tree-sitter"
+maintainer="thewalkingforest <fwalker@tutamail.com>"
+license="MIT"
+homepage="https://github.com/6cdh/tree-sitter-scheme"
+distfiles="https://github.com/6cdh/tree-sitter-scheme/archive/refs/tags/v${version}.tar.gz"
+checksum=73545a438b6684202682cae0d14abed4b8916d22ca6be2a1fbced016e023637d
+
+post_install() {
+	vlicense LICENSE
+}
